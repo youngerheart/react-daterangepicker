@@ -1,0 +1,1 @@
+const DateRangePicker = require('date-range-picker');
