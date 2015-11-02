@@ -8,6 +8,7 @@
   "description": "simple react-daterangepicker base on daterangepicker",
   "main": "server.js",
   "keywords": [
+    "react",
     "daterangepicker"
   ],
   "license": "PRIVATE",

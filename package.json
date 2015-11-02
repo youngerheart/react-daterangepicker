@@ -1,6 +1,6 @@
 {
   "name": "react-daterangepicker",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "description": "a simple react-daterangepicker base on date-range-picker",
   "main": "src/DateRangePicker.js",
   "scripts": {
@@ -11,6 +11,7 @@
     "url": "https://github.com/youngerheart/react-daterangepicker.git"
   },
   "keywords": [
+    "react",
     "daterangepicker"
   ],
   "author": "youngerheart",
@@ -20,11 +21,10 @@
   },
   "homepage": "https://github.com/youngerheart/react-daterangepicker",
   "dependencies": {
-    "date-range-picker": "^0.0.5"
+    "date-range-picker": "^0.0.8"
   },
   "devDependencies": {
     "gulp": "^3.8.11",
-    "gulp-concat": "^2.5.2",
     "gulp-eslint": ">=0.14.0",
     "gulp-browserify": "^0.5.1",
     "gulp-minify-css": "^0.5.1",

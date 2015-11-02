@@ -4,7 +4,6 @@ var minifyCss = require('gulp-minify-css');
 var rename = require("gulp-rename");
 var browserify = require('gulp-browserify');
 var babelify = require('babelify');
-var concat  = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var runSequence = require('run-sequence');
 var eslint = require('gulp-eslint');
@@ -33,22 +32,51 @@ gulp.task('compile.js', function() {
   return gulp
   .src('./src/index.js')
   .pipe(browserify({
-    transform: [babelify]
+    transform: [babelify],
+    extensions: ['.jsx']
   }))
-  .pipe(uglify({mangle: false}))
+  .pipe(uglify())
   .pipe(rename('react-daterangepicker.min.js'))
   .pipe(gulp.dest('dist'));
+});
+
+gulp.task('require.js', function() {
+  return gulp
+  .src('./src/react-dateRangePicker.js')
+  .pipe(browserify({
+    transform: [babelify]
+  }))
+  .pipe(uglify())
+  .pipe(rename('index.js'))
+  .pipe(gulp.dest('dist'));
+});
+
+gulp.task('compilelint.js', function(done) {
+  runSequence([
+    'compile.js',
+    'lint'
+  ], done);
 });
 
 gulp.task('compile', function(done) {
   runSequence([
     'compile.css',
-    'compile.js'
+    'compile.js',
+    'lint'
   ], done);
 });
 
+gulp.task('lint', function() {
+  return gulp
+  .src([
+    './src/**/*.js',
+  ])
+  .pipe(eslint())
+  .pipe(eslint.format());
+});
+
 gulp.task('watch.css', lazyWatch(['./src/**/*.scss', './src/**/*.css'], 'compile.css'));
-gulp.task('watch.js', lazyWatch(['./index.js', './src/**/*.js'], 'compile.js'));
+gulp.task('watch.js', lazyWatch(['./index.js', './src/**/*.js', './src/**/*.jsx'], 'compilelint.js'));
 
 gulp.task('watch', function(done) {
   runSequence([
@@ -59,7 +87,8 @@ gulp.task('watch', function(done) {
 
 gulp.task('build', function(done) {
   runSequence([
-    'compile'
+    'compile',
+    'require.js'
     ],  done);
 });
 
@@ -75,7 +104,6 @@ gulp.task('help', function() {
     console.log(' $ gulp help    # gulp 使用说明');
     console.log(' $ gulp build   # 生成文件');
     console.log(' $ gulp dev     # 进入一般开发环境');
-    console.log(' $ gulp publish # 压缩打包代码');
     console.log('=====================================');
   });
 });
