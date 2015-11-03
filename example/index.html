@@ -4,7 +4,10 @@
     <title>react-daterangepicker</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../dist/react-daterangepicker.min.css">
-    <style type="text/css"></style>
+    <style type="text/css">
+      .drp-day-number.focus {color: #fff; background-color: #ed5434;}
+      .drp-day-number.active {color: #fff; background-color: #8cace2;}
+    </style>
   </head>
   <body>
     <div id="demo"></div>
@@ -15,7 +18,16 @@
   <script type="text/javascript" src="../node_modules/react/dist/react.min.js"></script>
   <script type="text/javascript" src="../node_modules/react/dist/JSXTransformer.js"></script>
   <script type="text/javascript" src="../dist/react-daterangepicker.min.js"></script>
-  <script type="text/babel">
-    //ReactDOM.render(<>, document.getElementById('demo'));
+  <script type="text/jsx">
+    React.render(<ReactDateRangePicker
+      lang={'zh-cn'}
+      numberOfCalendars={1}
+      type={'range'}
+      time={true}
+      range={moment.range(['2015-10-01 23:33', '2015-10-04'])}
+      minDate={moment('2015-09-30')}
+      onSelect={function(date) {console.log(date)}}/>,
+      document.getElementById('demo')
+    );
   </script>
 </html>

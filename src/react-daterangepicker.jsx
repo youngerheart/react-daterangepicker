@@ -1,6 +1,7 @@
 const DateRangePicker = require('date-range-picker');
 
-const ReactDateRangePicker = React.creatClass({
+const ReactDateRangePicker = React.createClass({
+  displayName: 'ReactDateRangePicker',
   componentDidMount() {
     var {lang, numberOfCalendars, type, time, date, range, onSelect} = this.props;
     var config = {
