@@ -5,12 +5,111 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../dist/react-daterangepicker.min.css">
     <style type="text/css">
+      html, body {margin: 0;}
+      html {font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif; overflow-x: hidden; margin-top: 20px;}
+      .transform {transform:rotate(45deg); -ms-transform:rotate(45deg); -moz-transform:rotate(45deg);-webkit-transform:rotate(45deg);-o-transform:rotate(45deg);}
+      .forkme {text-decoration: none; position: fixed; right: -60px; top: 40px; z-index: 999; line-height: 40px; background-color: #56ad35; color: #fff; width: 240px; font-size: 18px; font-weight: bold; text-align: center; box-shadow: 0 0 5px #888888; z-index: 3;}
+      .header {color: #cb3837;line-height: 50px; position: fixed; top: 0px; left: 0px; right: 0px; z-index: 2; background: rgba(255, 255, 255, .9); box-shadow: 0 0 15px 3px rgba(0, 0, 0, .05);}
+      .header-title {margin-left: 50px; font-size: 30px;}
+      .header-link {color: #cb3837; margin-left: 30px; text-decoration: none; font-size: 20px;}
+      .header-link:hover {color: #ffa5a4}
+      .item {position: relative; margin-top: 55px; padding: 20px; background-color: #fcfcfc; border: #eee solid; border-width: 1px 0;}
+      .item-title {position: relative; margin-bottom: 20px; padding-left: 30px;}
+      .item-title-text {font-size: 24px;}
+      .item-title-value {line-height: 36px; border-radius: 3px; color: #fff; font-weight: bold; background-color: #ed5434; display: inline-block; padding: 0 10px;margin-left: 10px;}
+      .item-tag {padding: 0 0 30px 30px; font-size: 20px; width: 300px;}
+      .item-desc {overflow: auto; position: absolute; top: 70px; left: 400px; right: 20px; vertical-align: top; padding: 10px; border: 3px #fff solid; color: #fff; background-color: #333;}
+      .item-desc-fix {top: 20px;}
+      .item-desc pre {font-family: Menlo,Monaco,Consolas,"Courier New",monospace;}
       .drp-day-number.focus {color: #fff; background-color: #ed5434;}
       .drp-day-number.active {color: #fff; background-color: #8cace2;}
     </style>
   </head>
-  <body>
-    <div id="demo"></div>
+    <body>
+    <a target="_blank" href="https://github.com/youngerheart/react-daterangepicker" title="Forkme on github" class="forkme transform">Forkme on github</a>
+    <div class="header">
+      <span class="header-title">react-daterangepicker demo</span>
+      <a class="header-link" href="#top">css guide</a>
+      <a class="header-link" href="#config">js config</a>
+    </div>
+    <div class="item">
+      <div class='item-tag'>You should add basic stylesheet first, for focus (such as orange) and active (such as blue) items.</div>
+      <div class="item-desc item-desc-fix">
+        <pre>
+.drp-day-number.focus {color: #fff; background-color: #ed5434;}
+.drp-day-number.active {color: #fff; background-color: #8cace2;}
+        </pre>
+      </div>
+    </div>
+    <div id="config"></div>
+    <div class="item">
+      <div class="item-title">
+        <span class='item-title-text'>date-single-picker</span>
+        <span id='drp-single-value' class="item-title-value"></span>
+      </div>
+      <div id="drp-single"></div>
+      <div class="item-desc">
+        <pre>
+React.render(&lt;ReactDateRangePicker
+  lang={'zh-cn'}
+  numberOfCalendars={1}
+  type={'range'}
+  time={true}
+  range={moment.range(['2015-10-01 23:33', '2015-10-04'])}
+  minDate={moment('2015-09-30')}
+  onSelect={function(date) {
+    
+  }}/&gt;,
+  document.getElementById('drp-single')
+);
+        </pre>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-title">
+        <span class='item-title-text'>date-range-picker</span>
+        <span id='drp-range-value' class="item-title-value"></span>
+      </div>
+      <div id="drp-range"></div>
+      <div class="item-desc">
+        <pre>
+var configs2 = {
+  lang: 'en',
+  numberOfCalendars: 2,
+  type: 'range',
+  time: true,
+  range: moment.range(['2015-10-01 23:33', '2015-10-04']),
+  minDate: moment('2015-09-30'),
+  onSelect: function(date) {
+    // ...
+  }
+}
+var drp2 = new DateRangePicker(el2, configs2);
+        </pre>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-title">
+        <span class='item-title-text'>date-terminal-picker</span>
+        <span id='drp-terminal-value' class="item-title-value"></span>
+      </div>
+      <div id="drp-terminal"></div>
+      <div class="item-desc">
+        <pre>
+var configs3 = {
+  lang: 'fr',
+  numberOfCalendars: 3,
+  type: 'terminal',
+  range: moment.range(['2015-10-03', '2015-10-07']),
+  maxDate: moment(),
+  onSelect: function(date) {
+    // ...
+  }
+}
+var drp3 = new DateRangePicker(el3, configs3);
+        </pre>
+      </div>
+    </div>
   </body>
   <script type="text/javascript" src="../bower_components/moment/min/moment-with-locales.js"></script>
   <script type="text/javascript" src="../bower_components/moment-range/dist/moment-range.js"></script>
@@ -19,15 +118,41 @@
   <script type="text/javascript" src="../node_modules/react/dist/JSXTransformer.js"></script>
   <script type="text/javascript" src="../dist/react-daterangepicker.min.js"></script>
   <script type="text/jsx">
+    var el = function(name) {return document.getElementById(name);};
+
+    var setValue = function(el, moment) {
+      if(moment.start) {
+        el.innerHTML = 'Total: ' + moment.start.format('YYYY-MM-DD HH:mm') + '~' + moment.end.format('YYYY-MM-DD HH:mm');
+      } else {
+        el.innerHTML = 'Total: ' + moment.format('YYYY-MM-DD HH:mm');
+      }
+    };
+
+    var input1 = el('drp-single-value');
+    var input2 = el('drp-range-value');
+    var input3 = el('drp-terminal-value');
+    var el1 = el('drp-single');
+    var el2 = el('drp-range');
+    var el3 = el('drp-terminal');
+    var date = moment('2015-10-01 23:33');
+    var range1 = moment.range(['2015-10-01 23:33', '2015-10-04']);
+    var range2 = moment.range(['2015-10-03', '2015-10-07']);
+
     React.render(<ReactDateRangePicker
       lang={'zh-cn'}
       numberOfCalendars={1}
       type={'range'}
       time={true}
-      range={moment.range(['2015-10-01 23:33', '2015-10-04'])}
+      range={range1}
       minDate={moment('2015-09-30')}
-      onSelect={function(date) {console.log(date)}}/>,
-      document.getElementById('demo')
+      onSelect={function(date) {
+        setValue(input1, date);
+      }}/>,
+      document.getElementById('drp-single')
     );
+
+    setValue(input1, date);
+    setValue(input2, range1);
+    setValue(input3, range2);
   </script>
 </html>
