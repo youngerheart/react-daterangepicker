@@ -53,12 +53,12 @@
 React.render(&lt;ReactDateRangePicker
   lang={'zh-cn'}
   numberOfCalendars={1}
-  type={'range'}
+  type={'single'}
   time={true}
-  range={moment.range(['2015-10-01 23:33', '2015-10-04'])}
-  minDate={moment('2015-09-30')}
+  date={date}
+  maxDate={moment()}
   onSelect={function(date) {
-    
+    setValue(input1, date);
   }}/&gt;,
   document.getElementById('drp-single')
 );
@@ -73,18 +73,18 @@ React.render(&lt;ReactDateRangePicker
       <div id="drp-range"></div>
       <div class="item-desc">
         <pre>
-var configs2 = {
-  lang: 'en',
-  numberOfCalendars: 2,
-  type: 'range',
-  time: true,
-  range: moment.range(['2015-10-01 23:33', '2015-10-04']),
-  minDate: moment('2015-09-30'),
-  onSelect: function(date) {
-    // ...
-  }
-}
-var drp2 = new DateRangePicker(el2, configs2);
+React.render(&lt;ReactDateRangePicker
+  lang={'en'}
+  numberOfCalendars={2}
+  type={'range'}
+  time={true}
+  range={range1}
+  minDate={moment('2015-09-30')}
+  onSelect={function(date) {
+    setValue(input2, date);
+  }}/&gt;,
+  document.getElementById('drp-range')
+);
         </pre>
       </div>
     </div>
@@ -96,17 +96,17 @@ var drp2 = new DateRangePicker(el2, configs2);
       <div id="drp-terminal"></div>
       <div class="item-desc">
         <pre>
-var configs3 = {
-  lang: 'fr',
-  numberOfCalendars: 3,
-  type: 'terminal',
-  range: moment.range(['2015-10-03', '2015-10-07']),
-  maxDate: moment(),
-  onSelect: function(date) {
-    // ...
-  }
-}
-var drp3 = new DateRangePicker(el3, configs3);
+React.render(&lt;ReactDateRangePicker
+  lang={'fr'}
+  numberOfCalendars={3}
+  type={'terminal'}
+  time={true}
+  range={range2}
+  onSelect={function(date) {
+    setValue(input3, date);
+  }}/&gt;,
+  document.getElementById('drp-terminal')
+);
         </pre>
       </div>
     </div>
@@ -141,14 +141,39 @@ var drp3 = new DateRangePicker(el3, configs3);
     React.render(<ReactDateRangePicker
       lang={'zh-cn'}
       numberOfCalendars={1}
+      type={'single'}
+      time={true}
+      date={date}
+      maxDate={moment()}
+      onSelect={function(date) {
+        setValue(input1, date);
+      }}/>,
+      document.getElementById('drp-single')
+    );
+
+    React.render(<ReactDateRangePicker
+      lang={'en'}
+      numberOfCalendars={2}
       type={'range'}
       time={true}
       range={range1}
       minDate={moment('2015-09-30')}
       onSelect={function(date) {
-        setValue(input1, date);
+        setValue(input2, date);
       }}/>,
-      document.getElementById('drp-single')
+      document.getElementById('drp-range')
+    );
+
+    React.render(<ReactDateRangePicker
+      lang={'fr'}
+      numberOfCalendars={3}
+      type={'terminal'}
+      time={true}
+      range={range2}
+      onSelect={function(date) {
+        setValue(input3, date);
+      }}/>,
+      document.getElementById('drp-terminal')
     );
 
     setValue(input1, date);
