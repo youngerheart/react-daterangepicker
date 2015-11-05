@@ -44,7 +44,9 @@ gulp.task('require.js', function() {
   return gulp
   .src('./src/react-dateRangePicker.js')
   .pipe(browserify({
-    transform: [babelify]
+    transform: [babelify],
+    extensions: ['.jsx'],
+    standalone: 'ReactDateRangePicker'
   }))
   .pipe(uglify())
   .pipe(rename('index.js'))
