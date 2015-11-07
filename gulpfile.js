@@ -35,14 +35,14 @@ gulp.task('compile.js', function() {
     transform: [babelify],
     extensions: ['.jsx']
   }))
-
+  .pipe(uglify())
   .pipe(rename('react-daterangepicker.min.js'))
   .pipe(gulp.dest('dist'));
 });
 
 gulp.task('require.js', function() {
   return gulp
-  .src('./src/react-dateRangePicker.js')
+  .src('./src/react-dateRangePicker.jsx')
   .pipe(browserify({
     transform: [babelify],
     extensions: ['.jsx'],
@@ -64,6 +64,7 @@ gulp.task('compile', function(done) {
   runSequence([
     'compile.css',
     'compile.js',
+    'require.js',
     'lint'
   ], done);
 });
