@@ -19,6 +19,8 @@ simple react-daterangepicker base on [daterangepicker](https://github.com/ElemeF
 
 This component relies on moment and moment-range, so you should include them first
 
+      $ npm install react-daterangepicker
+
 Include js and css in `/dist` by tag , you can also require js by `require('react-daterangepicker')`
 
 
