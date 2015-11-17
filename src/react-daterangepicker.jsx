@@ -21,8 +21,10 @@ const ReactDateRangePicker = React.createClass({
     this.drp = new DateRangePicker(el, config);
   },
 
-  componentWillReciveProps(props) {
-    console.log(props);
+  componentWillReceiveProps(props) {
+    var type = props.type;
+    if(type === 'single') this.drp.set('date', props.date);
+    else if (type === 'range' || type === 'terminal') this.drp.set('range', props.range);
   },
 
   render() {

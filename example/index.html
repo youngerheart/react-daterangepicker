@@ -23,7 +23,7 @@
       .item-desc pre {font-family: Menlo,Monaco,Consolas,"Courier New",monospace;}
       .drp-day-number.focus {color: #fff; background-color: #ed5434;}
       .drp-day-number.active {color: #fff; background-color: #8cace2;}
-      .item-title-settimebtn {height: 30px; font-size: 20px; color: #fff; font-weight: bold; cursor: pointer; background-color: #8cace2; border: 0; margin-left: 20px;}
+      .item-title-settimebtn {height: 30px; font-size: 20px; color: #fff; font-weight: bold; cursor: pointer; background-color: #8cace2; border: 0; margin-left: 20px; display: block;}
     </style>
   </head>
     <body>
@@ -47,12 +47,17 @@
       <div class="item-title">
         <span class='item-title-text'>date-single-picker</span>
         <span id='drp-single-value' class="item-title-value"></span>
-        <button class="item-title-settimebtn" onclick="setSingleTime()">set time</button>
       </div>
       <div id="drp-single"></div>
       <div class="item-desc">
         <pre>
-React.render(&lt;ReactDateRangePicker
+setSingleTime: function() {
+  this.setState({
+    date: moment()
+  });
+},
+
+&lt;ReactDateRangePicker
   lang={'zh-cn'}
   numberOfCalendars={1}
   type={'single'}
@@ -61,9 +66,7 @@ React.render(&lt;ReactDateRangePicker
   maxDate={moment()}
   onSelect={function(date) {
     setValue(input1, date);
-  }}/&gt;,
-  document.getElementById('drp-single')
-);
+  }}/&gt;
         </pre>
       </div>
     </div>
@@ -71,12 +74,17 @@ React.render(&lt;ReactDateRangePicker
       <div class="item-title">
         <span class='item-title-text'>date-range-picker</span>
         <span id='drp-range-value' class="item-title-value"></span>
-        <button class="item-title-settimebtn" onclick="setRangeTime()">set time</button>
       </div>
       <div id="drp-range"></div>
       <div class="item-desc">
         <pre>
-React.render(&lt;ReactDateRangePicker
+setSingleTime: function() {
+  this.setState({
+    date: moment()
+  });
+},
+
+&lt;ReactDateRangePicker
   lang={'en'}
   numberOfCalendars={2}
   type={'range'}
@@ -85,9 +93,7 @@ React.render(&lt;ReactDateRangePicker
   minDate={moment('2015-09-30')}
   onSelect={function(date) {
     setValue(input2, date);
-  }}/&gt;,
-  document.getElementById('drp-range')
-);
+  }}/&gt;
         </pre>
       </div>
     </div>
@@ -99,7 +105,7 @@ React.render(&lt;ReactDateRangePicker
       <div id="drp-terminal"></div>
       <div class="item-desc">
         <pre>
-React.render(&lt;ReactDateRangePicker
+&lt;ReactDateRangePicker
   lang={'fr'}
   numberOfCalendars={3}
   type={'terminal'}
@@ -107,9 +113,7 @@ React.render(&lt;ReactDateRangePicker
   range={range2}
   onSelect={function(date) {
     setValue(input3, date);
-  }}/&gt;,
-  document.getElementById('drp-terminal')
-);
+  }}/&gt;
         </pre>
       </div>
     </div>
@@ -124,7 +128,7 @@ React.render(&lt;ReactDateRangePicker
 
     var el = function(name) {return document.getElementById(name);};
 
-    var setValue = function() {
+    var setValue = function(el, moment) {
       if(moment.start) {
         el.innerHTML = 'Total: ' + moment.start.format('YYYY-MM-DD HH:mm') + '~' + moment.end.format('YYYY-MM-DD HH:mm');
       } else {
@@ -133,7 +137,7 @@ React.render(&lt;ReactDateRangePicker
     };
 
     var Demo1 = React.createClass({
-      setInitialState: function() {
+      getInitialState: function() {
         return {
           input1: el('drp-single-value'),
           date: moment('2015-10-01 23:33')
@@ -141,55 +145,73 @@ React.render(&lt;ReactDateRangePicker
       },
 
       componentDidMount: function() {
-        setValue(input1, date);
+        setValue(this.state.input1, this.state.date);
+      },
+
+      setSingleTime: function() {
+        this.setState({
+          date: moment()
+        });
       },
 
       render: function() {
         var input1 = this.state.input1;
         var date = this.state.date;
-        return <ReactDateRangePicker
-          lang={'zh-cn'}
-          numberOfCalendars={1}
-          type={'single'}
-          time={true}
-          date={date}
-          maxDate={moment()}
-          onSelect={function(date) {
-            setValue(input1, date)
-          }}/>;
+        return <div>
+          <button className='item-title-settimebtn' onClick={this.setSingleTime}>set time</button>
+          <ReactDateRangePicker
+            lang={'zh-cn'}
+            numberOfCalendars={1}
+            type={'single'}
+            time={true}
+            date={date}
+            maxDate={moment()}
+            onSelect={function(date) {
+              setValue(input1, date)
+            }}/>
+        </div>;
       }
     });
 
     var Demo2 = React.createClass({
-      setInitialState: function() {
+      getInitialState: function() {
         return {
-          input2: el('drp-single-value'),
+          input2: el('drp-range-value'),
           range1: moment.range(['2015-10-01 23:33', '2015-10-04'])
         };
       },
 
       componentDidMount: function() {
-        setValue(input2, range1);
+        setValue(this.state.input2, this.state.range1);
+      },
+
+      setRangeTime: function() {
+        this.setState({
+          range1: moment.range(['2015-10-11 11:11', '2015-11-11 23:33'])
+        });
       },
 
       render: function() {
         var input2 = this.state.input2;
         var range1 = this.state.range1;
-        return <ReactDateRangePicker
-          lang={'en'}
-          numberOfCalendars={2}
-          type={'range'}
-          time={true}
-          range={range1}
-          minDate={moment('2015-09-30')}
-          onSelect={function(date) {
-            setValue(input2, date)
-          }}/>;
+        return <div>
+          <button className='item-title-settimebtn' onClick={this.setRangeTime}>set time</button>
+          <ReactDateRangePicker
+            lang={'en'}
+            numberOfCalendars={2}
+            type={'range'}
+            time={true}
+            range={range1}
+            minDate={moment('2015-09-30')}
+            onSelect={function(date) {
+              setValue(input2, date)
+            }}/>
+        </div>;
       }
     });
 
     var Demo3 = React.createClass({
-      setInitialState: function() {
+      getInitialState: function() {
         return {
           input3: el('drp-terminal-value'),
           range2: moment.range(['2015-10-03', '2015-10-07'])
@@ -197,7 +219,7 @@ React.render(&lt;ReactDateRangePicker
       },
 
       componentDidMount: function() {
-        setValue(input3, range2)
+        setValue(this.state.input3, this.state.range2);
       },
 
       render: function() {

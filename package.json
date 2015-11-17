@@ -1,6 +1,6 @@
 {
   "name": "react-daterangepicker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "a simple react-daterangepicker base on date-range-picker",
   "main": "dist/index.js",
   "scripts": {

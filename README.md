@@ -23,22 +23,26 @@ This component relies on moment and moment-range, so you should include them fir
 
 Include js and css in `/dist` by tag , you can also require js by `require('react-daterangepicker')`
 
+      setSingleTime: function() {
+        this.setState({
+          date: moment()
+        });
+      },
+      render() {
+        return &lt;ReactDateRangePicker
+          lang={'zh-cn'} // using language
+          numberOfCalendars={1} // displaying month number
+          type={'sinple'} // single, range, terminal
+          time={true} // want display & ctrl hours and minutes or not
+          date={moment()} // default date for type single
+          range={moment.range('')} // default range for type range or terminal
+          minDate={moment('2015-10-01')} // limit minDate
+          maxDate={moment(2015-10-09)} // limit maxDate
+          onSelect={function(date) { // callback after select, return date or range with moment and moment-range object
+            // ...
+          }}/&gt;,
+      }
 
-
-      React.render(&lt;ReactDateRangePicker
-        lang={'zh-cn'} // using language
-        numberOfCalendars={1} // displaying month number
-        type={'sinple'} // single, range, terminal
-        time={true} // want display & ctrl hours and minutes or not
-        date={moment()} // default date for type single
-        range={moment.range('')} // default range for type range or terminal
-        minDate={moment('2015-10-01')} // limit minDate
-        maxDate={moment(2015-10-09)} // limit maxDate
-        onSelect={function(date) { // callback after select, return date or range with moment and moment-range object
-          // ...
-        }}/&gt;,
-        document.getElementById('drp-simple')
-      );
 
 
 
