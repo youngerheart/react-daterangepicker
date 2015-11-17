@@ -1,7 +1,11 @@
 const DateRangePicker = require('date-range-picker');
 
 const ReactDateRangePicker = React.createClass({
+
+  drp: null,
+
   displayName: 'ReactDateRangePicker',
+
   componentDidMount() {
     var {lang, numberOfCalendars, type, time, date, range, onSelect} = this.props;
     var config = {
@@ -14,8 +18,15 @@ const ReactDateRangePicker = React.createClass({
       onSelect: onSelect
     }
     var el = React.findDOMNode(this.refs.drp);
-    var drp = new DateRangePicker(el, config);
+    this.drp = new DateRangePicker(el, config);
   },
+
+  componentWillReceiveProps(props) {
+    var type = props.type;
+    if(type === 'single') this.drp.set('date', props.date);
+    else if (type === 'range' || type === 'terminal') this.drp.set('range', props.range);
+  },
+
   render() {
     return <div className='drp' ref='drp'></div>;
   }
