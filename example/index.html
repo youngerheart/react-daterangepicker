@@ -23,6 +23,7 @@
       .item-desc pre {font-family: Menlo,Monaco,Consolas,"Courier New",monospace;}
       .drp-day-number.focus {color: #fff; background-color: #ed5434;}
       .drp-day-number.active {color: #fff; background-color: #8cace2;}
+      .item-title-settimebtn {height: 30px; font-size: 20px; color: #fff; font-weight: bold; cursor: pointer; background-color: #8cace2; border: 0; margin-left: 20px;}
     </style>
   </head>
     <body>
@@ -46,6 +47,7 @@
       <div class="item-title">
         <span class='item-title-text'>date-single-picker</span>
         <span id='drp-single-value' class="item-title-value"></span>
+        <button class="item-title-settimebtn" onclick="setSingleTime()">set time</button>
       </div>
       <div id="drp-single"></div>
       <div class="item-desc">
@@ -69,6 +71,7 @@ React.render(&lt;ReactDateRangePicker
       <div class="item-title">
         <span class='item-title-text'>date-range-picker</span>
         <span id='drp-range-value' class="item-title-value"></span>
+        <button class="item-title-settimebtn" onclick="setRangeTime()">set time</button>
       </div>
       <div id="drp-range"></div>
       <div class="item-desc">
@@ -118,9 +121,10 @@ React.render(&lt;ReactDateRangePicker
   <script type="text/javascript" src="../node_modules/react/dist/JSXTransformer.js"></script>
   <script type="text/javascript" src="../dist/react-daterangepicker.min.js"></script>
   <script type="text/jsx">
+
     var el = function(name) {return document.getElementById(name);};
 
-    var setValue = function(el, moment) {
+    var setValue = function() {
       if(moment.start) {
         el.innerHTML = 'Total: ' + moment.start.format('YYYY-MM-DD HH:mm') + '~' + moment.end.format('YYYY-MM-DD HH:mm');
       } else {
@@ -128,56 +132,94 @@ React.render(&lt;ReactDateRangePicker
       }
     };
 
-    var input1 = el('drp-single-value');
-    var input2 = el('drp-range-value');
-    var input3 = el('drp-terminal-value');
-    var el1 = el('drp-single');
-    var el2 = el('drp-range');
-    var el3 = el('drp-terminal');
-    var date = moment('2015-10-01 23:33');
-    var range1 = moment.range(['2015-10-01 23:33', '2015-10-04']);
-    var range2 = moment.range(['2015-10-03', '2015-10-07']);
+    var Demo1 = React.createClass({
+      setInitialState: function() {
+        return {
+          input1: el('drp-single-value'),
+          date: moment('2015-10-01 23:33')
+        };
+      },
 
-    React.render(<ReactDateRangePicker
-      lang={'zh-cn'}
-      numberOfCalendars={1}
-      type={'single'}
-      time={true}
-      date={date}
-      maxDate={moment()}
-      onSelect={function(date) {
+      componentDidMount: function() {
         setValue(input1, date);
-      }}/>,
-      document.getElementById('drp-single')
-    );
+      },
 
-    React.render(<ReactDateRangePicker
-      lang={'en'}
-      numberOfCalendars={2}
-      type={'range'}
-      time={true}
-      range={range1}
-      minDate={moment('2015-09-30')}
-      onSelect={function(date) {
-        setValue(input2, date);
-      }}/>,
-      document.getElementById('drp-range')
-    );
+      render: function() {
+        var input1 = this.state.input1;
+        var date = this.state.date;
+        return <ReactDateRangePicker
+          lang={'zh-cn'}
+          numberOfCalendars={1}
+          type={'single'}
+          time={true}
+          date={date}
+          maxDate={moment()}
+          onSelect={function(date) {
+            setValue(input1, date)
+          }}/>;
+      }
+    });
 
-    React.render(<ReactDateRangePicker
-      lang={'fr'}
-      numberOfCalendars={3}
-      type={'terminal'}
-      time={true}
-      range={range2}
-      onSelect={function(date) {
-        setValue(input3, date);
-      }}/>,
-      document.getElementById('drp-terminal')
-    );
+    var Demo2 = React.createClass({
+      setInitialState: function() {
+        return {
+          input2: el('drp-single-value'),
+          range1: moment.range(['2015-10-01 23:33', '2015-10-04'])
+        };
+      },
 
-    setValue(input1, date);
-    setValue(input2, range1);
-    setValue(input3, range2);
+      componentDidMount: function() {
+        setValue(input2, range1);
+      },
+
+      render: function() {
+        var input2 = this.state.input2;
+        var range1 = this.state.range1;
+        return <ReactDateRangePicker
+          lang={'en'}
+          numberOfCalendars={2}
+          type={'range'}
+          time={true}
+          range={range1}
+          minDate={moment('2015-09-30')}
+          onSelect={function(date) {
+            setValue(input2, date)
+          }}/>;
+      }
+    });
+
+    var Demo3 = React.createClass({
+      setInitialState: function() {
+        return {
+          input3: el('drp-terminal-value'),
+          range2: moment.range(['2015-10-03', '2015-10-07'])
+        };
+      },
+
+      componentDidMount: function() {
+        setValue(input3, range2)
+      },
+
+      render: function() {
+        var input3 = this.state.input3;
+        var range2 = this.state.range2;
+        return <ReactDateRangePicker
+          lang={'en'}
+          numberOfCalendars={2}
+          type={'range'}
+          time={true}
+          range={range2}
+          minDate={moment('2015-09-30')}
+          onSelect={function(date) {
+            setValue(input3, date)
+          }}/>;
+      }
+    });
+
+    React.render(<Demo1 />, el('drp-single'));
+    React.render(<Demo2 />, el('drp-range'));
+    React.render(<Demo3 />, el('drp-terminal'));
+
+
   </script>
 </html>
