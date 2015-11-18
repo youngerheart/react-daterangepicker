@@ -3,6 +3,4 @@
 .sass-cache
 .bin
 *.log
-bower_components
-node_modules
 .idea
