@@ -29,7 +29,7 @@ Include js and css in `/dist` by tag , you can also require js by `require('reac
         });
       },
       render() {
-        return &lt;ReactDateRangePicker
+        return <ReactDateRangePicker
           lang={'zh-cn'} // using language
           numberOfCalendars={1} // displaying month number
           type={'sinple'} // single, range, terminal
@@ -40,7 +40,7 @@ Include js and css in `/dist` by tag , you can also require js by `require('reac
           maxDate={moment(2015-10-09)} // limit maxDate
           onSelect={function(date) { // callback after select, return date or range with moment and moment-range object
             // ...
-          }}/&gt;,
+          }}/>,
       }
 
 
