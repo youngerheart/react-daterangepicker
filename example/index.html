@@ -23,7 +23,7 @@
       .item-desc pre {font-family: Menlo,Monaco,Consolas,"Courier New",monospace;}
       .drp-day-number.focus {color: #fff; background-color: #ed5434;}
       .drp-day-number.active {color: #fff; background-color: #8cace2;}
-      .item-title-settimebtn {height: 30px; font-size: 20px; color: #fff; font-weight: bold; cursor: pointer; background-color: #8cace2; border: 0; margin-left: 20px; display: block;}
+      .item-title-settimebtn {height: 30px; font-size: 20px; color: #fff; font-weight: bold; cursor: pointer; background-color: #8cace2; border: 0; margin-left: 20px; display: block; margin-bottom: 5px;}
     </style>
   </head>
     <body>
@@ -57,6 +57,12 @@ setSingleTime: function() {
   });
 },
 
+clearSingleTime: function() {
+  this.setState({
+    date: null
+  });
+},
+
 &lt;ReactDateRangePicker
   lang={'zh-cn'}
   numberOfCalendars={1}
@@ -81,6 +87,12 @@ setSingleTime: function() {
 setSingleTime: function() {
   this.setState({
     date: moment()
+  });
+},
+
+clearRangeTime: function() {
+  this.setState({
+    range1: null
   });
 },
 
@@ -154,11 +166,18 @@ setSingleTime: function() {
         });
       },
 
+      clearSingleTime: function() {
+        this.setState({
+          date: null
+        });
+      },
+
       render: function() {
         var input1 = this.state.input1;
         var date = this.state.date;
         return <div>
           <button className='item-title-settimebtn' onClick={this.setSingleTime}>set time</button>
+          <button className='item-title-settimebtn' onClick={this.clearSingleTime}>clear</button>
           <ReactDateRangePicker
             lang={'zh-cn'}
             numberOfCalendars={1}
@@ -191,11 +210,18 @@ setSingleTime: function() {
         });
       },
 
+      clearRangeTime: function() {
+        this.setState({
+          range1: null
+        });
+      },
+
       render: function() {
         var input2 = this.state.input2;
         var range1 = this.state.range1;
         return <div>
           <button className='item-title-settimebtn' onClick={this.setRangeTime}>set time</button>
+          <button className='item-title-settimebtn' onClick={this.clearRangeTime}>clear</button>
           <ReactDateRangePicker
             lang={'en'}
             numberOfCalendars={2}
@@ -227,7 +253,7 @@ setSingleTime: function() {
         var range2 = this.state.range2;
         return <ReactDateRangePicker
           lang={'en'}
-          numberOfCalendars={2}
+          numberOfCalendars={3}
           type={'terminal'}
           time={true}
           range={range2}

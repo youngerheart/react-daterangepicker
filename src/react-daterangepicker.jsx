@@ -7,14 +7,16 @@ const ReactDateRangePicker = React.createClass({
   displayName: 'ReactDateRangePicker',
 
   componentDidMount() {
-    var {lang, numberOfCalendars, type, time, date, range, onSelect} = this.props;
+    var {lang, numberOfCalendars, type, time, date, range, onSelect, maxDate, minDate} = this.props;
     var config = {
-      lang: lang,
-      numberOfCalendars: numberOfCalendars,
-      type: type,
-      time: time,
-      date: date,
-      range: range,
+      lang,
+      numberOfCalendars,
+      type,
+      time,
+      date,
+      range,
+      maxDate,
+      minDate,
       onSelect: onSelect
     }
     var el = React.findDOMNode(this.refs.drp);
@@ -23,8 +25,13 @@ const ReactDateRangePicker = React.createClass({
 
   componentWillReceiveProps(props) {
     var type = props.type;
-    if(type === 'single') this.drp.set('date', props.date);
-    else if (type === 'range' || type === 'terminal') this.drp.set('range', props.range);
+    if(type === 'single') {
+      if(props.date) this.drp.set('date', props.date);
+      else this.drp.clear();
+    }
+    else if (type === 'range' || type === 'terminal') 
+      if(props.range) this.drp.set('range', props.range);
+      else this.drp.clear();
   },
 
   render() {
