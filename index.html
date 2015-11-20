@@ -18,12 +18,13 @@
       .item-title-text {font-size: 24px;}
       .item-title-value {line-height: 36px; border-radius: 3px; color: #fff; font-weight: bold; background-color: #ed5434; display: inline-block; padding: 0 10px;margin-left: 10px;}
       .item-tag {padding: 0 0 30px 30px; font-size: 20px; width: 300px;}
-      .item-desc {overflow: auto; position: absolute; top: 70px; left: 400px; right: 20px; vertical-align: top; padding: 10px; border: 3px #fff solid; color: #fff; background-color: #333;}
+      .item-desc {overflow: auto; position: absolute; top: 70px; left: 400px; right: 20px; vertical-align: top; padding: 0 10px; border: 3px #fff solid; color: #fff; background-color: #333;}
       .item-desc-fix {top: 20px;}
       .item-desc pre {font-family: Menlo,Monaco,Consolas,"Courier New",monospace;}
       .drp-day-number.focus {color: #fff; background-color: #ed5434;}
       .drp-day-number.active {color: #fff; background-color: #8cace2;}
-      .item-title-settimebtn {height: 30px; font-size: 20px; color: #fff; font-weight: bold; cursor: pointer; background-color: #8cace2; border: 0; margin-left: 20px; display: block;}
+      .drp-day-number.active {color: #fff; background-color: #8cace2;}
+      .item-title-settimebtn {height: 30px; font-size: 20px; color: #fff; font-weight: bold; cursor: pointer; background-color: #8cace2; border: 0; margin-left: 20px; display: block; margin-bottom: 5px;}
     </style>
   </head>
     <body>
@@ -56,7 +57,11 @@ setSingleTime: function() {
     date: moment()
   });
 },
-
+clearSingleTime: function() {
+  this.setState({
+    date: null
+  });
+},
 &lt;ReactDateRangePicker
   lang={'zh-cn'}
   numberOfCalendars={1}
@@ -83,7 +88,11 @@ setSingleTime: function() {
     date: moment()
   });
 },
-
+clearRangeTime: function() {
+  this.setState({
+    range1: null
+  });
+},
 &lt;ReactDateRangePicker
   lang={'en'}
   numberOfCalendars={2}
@@ -154,11 +163,18 @@ setSingleTime: function() {
         });
       },
 
+      clearSingleTime: function() {
+        this.setState({
+          date: null
+        });
+      },
+
       render: function() {
         var input1 = this.state.input1;
         var date = this.state.date;
         return <div>
           <button className='item-title-settimebtn' onClick={this.setSingleTime}>set time</button>
+          <button className='item-title-settimebtn' onClick={this.clearSingleTime}>clear</button>
           <ReactDateRangePicker
             lang={'zh-cn'}
             numberOfCalendars={1}
@@ -191,11 +207,18 @@ setSingleTime: function() {
         });
       },
 
+      clearRangeTime: function() {
+        this.setState({
+          range1: null
+        });
+      },
+
       render: function() {
         var input2 = this.state.input2;
         var range1 = this.state.range1;
         return <div>
           <button className='item-title-settimebtn' onClick={this.setRangeTime}>set time</button>
+          <button className='item-title-settimebtn' onClick={this.clearRangeTime}>clear</button>
           <ReactDateRangePicker
             lang={'en'}
             numberOfCalendars={2}
