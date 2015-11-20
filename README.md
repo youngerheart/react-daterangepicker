@@ -28,6 +28,13 @@ Include js and css in `/dist` by tag , you can also require js by `require('reac
           date: moment()
         });
       },
+      
+      clearSingleTime: function() {
+        this.setState({
+          date: null
+        });
+      },
+
       render() {
         return <ReactDateRangePicker
           lang={'zh-cn'} // using language
