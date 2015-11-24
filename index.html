@@ -18,11 +18,10 @@
       .item-title-text {font-size: 24px;}
       .item-title-value {line-height: 36px; border-radius: 3px; color: #fff; font-weight: bold; background-color: #ed5434; display: inline-block; padding: 0 10px;margin-left: 10px;}
       .item-tag {padding: 0 0 30px 30px; font-size: 20px; width: 300px;}
-      .item-desc {overflow: auto; position: absolute; top: 70px; left: 400px; right: 20px; vertical-align: top; padding: 0 10px; border: 3px #fff solid; color: #fff; background-color: #333;}
+      .item-desc {overflow: auto; position: absolute; top: 70px; left: 400px; right: 20px; vertical-align: top; padding: 10px; border: 3px #fff solid; color: #fff; background-color: #333;}
       .item-desc-fix {top: 20px;}
       .item-desc pre {font-family: Menlo,Monaco,Consolas,"Courier New",monospace;}
       .drp-day-number.focus {color: #fff; background-color: #ed5434;}
-      .drp-day-number.active {color: #fff; background-color: #8cace2;}
       .drp-day-number.active {color: #fff; background-color: #8cace2;}
       .item-title-settimebtn {height: 30px; font-size: 20px; color: #fff; font-weight: bold; cursor: pointer; background-color: #8cace2; border: 0; margin-left: 20px; display: block; margin-bottom: 5px;}
     </style>
@@ -49,6 +48,7 @@
         <span class='item-title-text'>date-single-picker</span>
         <span id='drp-single-value' class="item-title-value"></span>
       </div>
+      <div id="drp-single-shortcuts"></div>
       <div id="drp-single"></div>
       <div class="item-desc">
         <pre>
@@ -69,6 +69,7 @@ clearSingleTime: function() {
   time={true}
   date={date}
   maxDate={moment()}
+  shortcuts={{el: elObj}}
   onSelect={function(date) {
     setValue(input1, date);
   }}/&gt;
@@ -80,6 +81,7 @@ clearSingleTime: function() {
         <span class='item-title-text'>date-range-picker</span>
         <span id='drp-range-value' class="item-title-value"></span>
       </div>
+      <div id="drp-range-shortcuts"></div>
       <div id="drp-range"></div>
       <div class="item-desc">
         <pre>
@@ -100,6 +102,7 @@ clearRangeTime: function() {
   time={true}
   range={range1}
   minDate={moment('2015-09-30')}
+  shortcuts={{el: elObj}}
   onSelect={function(date) {
     setValue(input2, date);
   }}/&gt;
@@ -111,15 +114,17 @@ clearRangeTime: function() {
         <span class='item-title-text'>date-terminal-picker</span>
         <span id='drp-terminal-value' class="item-title-value"></span>
       </div>
+      <div id="drp-terminal-shortcuts"></div>
       <div id="drp-terminal"></div>
       <div class="item-desc">
         <pre>
 &lt;ReactDateRangePicker
-  lang={'fr'}
+  lang={'jp'}
   numberOfCalendars={3}
   type={'terminal'}
   time={true}
   range={range2}
+  shortcuts={{el: elObj}}
   onSelect={function(date) {
     setValue(input3, date);
   }}/&gt;
@@ -182,6 +187,7 @@ clearRangeTime: function() {
             time={true}
             date={date}
             maxDate={moment()}
+            shortcuts={{el: el('drp-single-shortcuts')}}
             onSelect={function(date) {
               setValue(input1, date)
             }}/>
@@ -226,6 +232,7 @@ clearRangeTime: function() {
             time={true}
             range={range1}
             minDate={moment('2015-09-30')}
+            shortcuts={{el: el('drp-range-shortcuts')}}
             onSelect={function(date) {
               setValue(input2, date)
             }}/>
@@ -249,12 +256,13 @@ clearRangeTime: function() {
         var input3 = this.state.input3;
         var range2 = this.state.range2;
         return <ReactDateRangePicker
-          lang={'en'}
-          numberOfCalendars={2}
+          lang={'ja'}
+          numberOfCalendars={3}
           type={'terminal'}
           time={true}
           range={range2}
           minDate={moment('2015-09-30')}
+          shortcuts={{el: el('drp-terminal-shortcuts')}}
           onSelect={function(date) {
             setValue(input3, date)
           }}/>;
@@ -264,7 +272,6 @@ clearRangeTime: function() {
     React.render(<Demo1 />, el('drp-single'));
     React.render(<Demo2 />, el('drp-range'));
     React.render(<Demo3 />, el('drp-terminal'));
-
 
   </script>
 </html>
