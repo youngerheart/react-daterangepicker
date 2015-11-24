@@ -7,7 +7,7 @@ const ReactDateRangePicker = React.createClass({
   displayName: 'ReactDateRangePicker',
 
   componentDidMount() {
-    var {lang, numberOfCalendars, type, time, date, range, onSelect, maxDate, minDate} = this.props;
+    var {lang, numberOfCalendars, type, time, date, range, onSelect, maxDate, minDate, shortcuts} = this.props;
     var config = {
       lang,
       numberOfCalendars,
@@ -17,6 +17,7 @@ const ReactDateRangePicker = React.createClass({
       range,
       maxDate,
       minDate,
+      shortcuts,
       onSelect: onSelect
     }
     var el = React.findDOMNode(this.refs.drp);
