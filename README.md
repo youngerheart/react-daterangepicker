@@ -1,4 +1,5 @@
-# react-daterangepicker
+react-daterangepicker [![Build Status](https://travis-ci.org/youngerheart/react-daterangepicker.svg)](https://travis-ci.org/youngerheart/react-daterangepicker)
+=========
 simple react-daterangepicker base on [daterangepicker](https://github.com/ElemeFE/daterangepicker)
 
 ## DEMO
